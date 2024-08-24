@@ -43,7 +43,7 @@ html, body {
 }
 
 /* Estilo para o botão de adicionar CEPs */
-.add-cep-button {
+#add-cep {
     background-color: #7030A0; /* Cor de fundo roxa */
     border: none;
     color: white;
@@ -56,12 +56,12 @@ html, body {
 }
 
 /* Estilo para o botão ao passar o mouse */
-.add-cep-button:hover {
+#add-cep-button:hover {
     background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
 }
 
 /* Estilo para o botão ao ser clicado */
-.add-cep-button:active {
+#add-cep-button:active {
     background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
     transform: scale(0.98); /* Leve redução de tamanho ao clicar */
 }
@@ -194,7 +194,7 @@ html, body {
     }
 
     #pins-list button:hover {
-        background-color: #330655; /* Cor mais escura ao passar o mouse */
+        background-color: none; /* Cor mais escura ao passar o mouse */
         color: white;
     }
 

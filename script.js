@@ -28,7 +28,6 @@ function addPins() {
     });
     clearInputField();
 }
-console.log()
 
 function geocodeAddress(address, color) {
     const geocoder = new google.maps.Geocoder();
@@ -48,15 +47,15 @@ function geocodeAddress(address, color) {
             const listItem = document.createElement('li');
             const pinIcon = document.createElement('img');
             pinIcon.src = `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`;
-
             listItem.appendChild(pinIcon);
             listItem.appendChild(document.createTextNode(`Pin ${pinCounter}: ${results[0].formatted_address}`));
             listItem.dataset.index = pinCounter - 1;
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'X';
-            deleteButton.onclick = function () {
-                removePin(pinCounter - 1);
+            deleteButton.onclick = (event) => {
+                const index = event.target.parentElement.getAttribute('data-index');
+                removePin(index);
             };
             listItem.appendChild(deleteButton);
 
@@ -64,7 +63,7 @@ function geocodeAddress(address, color) {
                 highlightPin(pinCounter - 1);
             };
 
-            document.getElementById("list").appendChild(listItem);
+            document.getElementById('list').appendChild(listItem);
 
             map.fitBounds(bounds);
             map.setZoom(14);
@@ -81,7 +80,6 @@ function geocodeAddress(address, color) {
         }
     });
 }
-console.log()
 
 function highlightListItem(index) {
     const listItems = document.querySelectorAll('#list li');
@@ -93,8 +91,6 @@ function highlightListItem(index) {
         listItem.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 }
-
-console.log()
 
 function highlightMarker(index) {
     markers.forEach(marker => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png'));
@@ -129,8 +125,13 @@ function clearInputField() {
 
 function removePin(index) {
     if (index >= 0 && index < markers.length) {
+        // Remove o marcador do mapa
         markers[index].setMap(null);
+
+        // Remove o marcador do array
         markers.splice(index, 1);
+
+        // Remove o item da lista
         document.querySelector(`#list li[data-index='${index}']`).remove();
 
         // Atualiza os índices dos pins restantes
@@ -146,15 +147,15 @@ function removePin(index) {
         bounds = new google.maps.LatLngBounds();
         markers.forEach(marker => bounds.extend(marker.getPosition()));
         map.fitBounds(bounds);
+
         if (markers.length > 0) {
             map.setZoom(14); // Ajusta o zoom para visão de bairro
         } else {
-            map.setZoom(4); // Zoom inicial se não houver pins
+            map.setZoom(5); // Zoom inicial se não houver pins
         }
     }
 }
 
-// Adiciona funcionalidade de Enter e Shift + Enter
 document.getElementById('address').addEventListener('keypress', function (event) {
     if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
@@ -169,3 +170,4 @@ document.getElementById('address').addEventListener('keypress', function (event)
         input.selectionEnd = cursorPos + 1;
     }
 });
+
