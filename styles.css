@@ -69,12 +69,13 @@ html, body {
 /* Estilo para o input de texto - Espaço onde incluo os CEPs */
     #form-container input[type="text"],
     #form-container select {
+
         width: 100%; /* Ocupa toda a largura disponível */
         padding: 1px;
         border: 1px solid #7030A0;
         border-radius: 4px;
         margin-bottom: 5px;
-        font-size: 16px;
+        font-size: 14px;
     }
 
     #form-container #address {
@@ -135,6 +136,7 @@ html, body {
 }
 /* Estilo para a lista de pins */
 #pins-list {
+    position: relative;
     margin-top: 15px;
     width: 300px;
     max-height: calc(100% - 220px); /* Ajustado para não cobrir o mapa */
@@ -142,8 +144,7 @@ html, body {
     background-color: rgba(255, 255, 255, 0.8);
     z-index: 5;
     padding: 10px;
-    position: relative;
-    left: 0;
+    right: 0;
 }
 
     /* Estilo para o item destacado da lista de pins */
