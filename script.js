@@ -6,7 +6,7 @@ let markers = [];
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -14.235004, lng: -51.92528 }, // Centraliza o mapa no Brasil
-        zoom: 4
+        zoom: 5
     });
     bounds = new google.maps.LatLngBounds();
 }
@@ -24,6 +24,7 @@ function addPins() {
     });
     clearInputField();
 }
+console.log()
 
 function geocodeAddress(address, color) {
     const geocoder = new google.maps.Geocoder();
@@ -35,7 +36,6 @@ function geocodeAddress(address, color) {
             const marker = new google.maps.Marker({
                 map: map,
                 position: location,
-                label: `${pinCounter}`,
                 icon: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
             });
 
@@ -44,11 +44,11 @@ function geocodeAddress(address, color) {
             const listItem = document.createElement('li');
             const pinIcon = document.createElement('img');
             pinIcon.src = `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`;
+
             listItem.appendChild(pinIcon);
             listItem.appendChild(document.createTextNode(`Pin ${pinCounter}: ${results[0].formatted_address}`));
             listItem.dataset.index = pinCounter - 1;
 
-            // Adiciona o botão de excluir pin
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'X';
             deleteButton.onclick = function () {
@@ -56,14 +56,17 @@ function geocodeAddress(address, color) {
             };
             listItem.appendChild(deleteButton);
 
+            listItem.onclick = function () {
+                highlightPin(pinCounter - 1);
+            };
+
             document.getElementById("list").appendChild(listItem);
 
-            // Ajusta o zoom para incluir todos os pins
             map.fitBounds(bounds);
-            map.setZoom(14); // Zoom ajustado para visão de bairro
+            map.setZoom(14);
 
             marker.addListener('click', function () {
-                map.setZoom(14); // Mantém o zoom no nível do bairro ao clicar no pin
+                map.setZoom(14);
                 map.setCenter(marker.getPosition());
                 highlightListItem(pinCounter - 1);
             });
@@ -74,17 +77,37 @@ function geocodeAddress(address, color) {
         }
     });
 }
+console.log()
 
 function highlightListItem(index) {
     const listItems = document.querySelectorAll('#list li');
-    listItems.forEach(item => {
-        item.classList.remove('highlight');
-    });
+    listItems.forEach(item => item.classList.remove('highlight'));
+
     const listItem = document.querySelector(`#list li[data-index='${index}']`);
-    listItem.classList.add('highlight');
-    listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (listItem) {
+        listItem.classList.add('highlight');
+        listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 }
 
+console.log()
+
+function highlightMarker(index) {
+    markers.forEach(marker => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png'));
+
+    const marker = markers[index];
+    if (marker) {
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+        map.setZoom(14);
+        map.setCenter(marker.getPosition());
+    }
+}
+
+function highlightPin(index) {
+    highlightListItem(index);
+    highlightMarker(index);
+}
+ 
 function clearInput() {
     document.getElementById("address").value = '';
     document.getElementById("list").innerHTML = '';
@@ -93,7 +116,7 @@ function clearInput() {
     markers = [];
     bounds = new google.maps.LatLngBounds();
     map.setCenter({ lat: -14.235004, lng: -51.92528 });
-    map.setZoom(4);
+    map.setZoom(5);
 }
 
 function clearInputField() {

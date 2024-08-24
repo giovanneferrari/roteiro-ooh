@@ -18,15 +18,19 @@
                 <option value="purple">Roxo</option>
             </select>
             <div>
-                <button onclick="addPins()">Adicionar Pins</button>
-                <button onclick="clearInput()">Limpar</button>
+                <button onclick="addPins()">Adicionar</button>
             </div>
         </div>
         <div id="map"></div>
         <div id="pins-list">
+            <h3 id="pins-title">Pontos selecionados</h3>
             <ul id="list"></ul>
             <button id="delete-all" onclick="clearInput()">Excluir Todos</button>
         </div>
+    </div>
+    <!-- Rótulo do Criador -->
+    <div id="creator-box">
+        <p>Desenvolvido por @GiovanneFerrari</p>
     </div>
 
     <script src="script.js"></script>
