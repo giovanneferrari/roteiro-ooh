@@ -17,6 +17,10 @@ function addPins() {
     const addresses = input.split('\n').map(addr => addr.trim());
     const color = document.getElementById('pin-color').value;
 
+    // Log para depuração
+    console.log('Endereços:', addresses);
+    console.log('Cor selecionada:', color);
+
     addresses.forEach(address => {
         if (address) {
             geocodeAddress(address, color);

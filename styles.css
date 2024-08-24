@@ -42,6 +42,30 @@ html, body {
     flex-direction: column;
 }
 
+/* Estilo para o botão de adicionar CEPs */
+.add-cep-button {
+    background-color: #7030A0; /* Cor de fundo roxa */
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding: 12px 20px; /* Padding consistente */
+    cursor: pointer;
+    font-size: 16px; /* Tamanho de fonte consistente */
+    width: 100%; /* Largura completa */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+}
+
+/* Estilo para o botão ao passar o mouse */
+.add-cep-button:hover {
+    background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
+}
+
+/* Estilo para o botão ao ser clicado */
+.add-cep-button:active {
+    background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
+    transform: scale(0.98); /* Leve redução de tamanho ao clicar */
+}
+
 /* Estilo para o input de texto - Espaço onde incluo os CEPs */
     #form-container input[type="text"],
     #form-container select {
