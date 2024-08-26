@@ -22,6 +22,16 @@ h3 {
   text-align: center; /* Alinha o texto ao centro */
 }
 
+/* Estilo para o filtro de cores dos Pins*/
+#color-filter {
+  text-align: center;
+  font-size: 15px;
+  max-height: calc(100% - 0px); /* Ajustado para não cobrir o mapa */
+  width: 280px;
+  color: #a978ce;
+  background-color: #ffffff;
+}
+
 /* Estilo para o container do mapa e a área ao redor do mapa */
 #map-container {
   position: relative;
@@ -122,10 +132,9 @@ h3 {
   border: none;
   color: white;
   border-radius: 4px;
-  padding: 6px 20px; /* Padding consistente */
+  padding: 10px 90px; /* Padding consistente */
   cursor: pointer;
   font-size: 16px;
-  width: 100%; /* Largura completa */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para efeitos */
 }
 
