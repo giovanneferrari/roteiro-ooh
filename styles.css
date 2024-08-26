@@ -32,6 +32,10 @@ h3 {
   background-color: #ffffff;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Estilo para o container do mapa e a área ao redor do mapa */
 #map-container {
   position: relative;

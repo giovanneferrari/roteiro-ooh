@@ -127,7 +127,7 @@ function highlightPin(index) {
     currentInfoWindow.close();
   }
   const marker = markers[index];
-  if (marker) {
+  if (marker && marker.getVisible()) {
     map.panTo(marker.getPosition());
     currentInfoWindow = marker.infowindow;
     marker.infowindow.open(map, marker);
@@ -199,13 +199,10 @@ const colorFilterSelect = document.getElementById("color-filter");
 colorFilterSelect.addEventListener("change", function () {
   const selectedColor = this.value;
   const listItems = document.querySelectorAll("#list li");
-  const listElement = document.getElementById("list");
-  const filteredListElement = document.getElementById("filtered-list");
 
   if (selectedColor === "all") {
-    listItems.forEach((item) => (item.style.visibility = "visible"));
-    listElement.style.display = "block";
-    filteredListElement.style.display = "none";
+    listItems.forEach((item) => (item.style.display = "block"));
+    markers.forEach((marker) => marker.setVisible(true));
   } else {
     listItems.forEach((item) => {
       const pinColor = item
@@ -214,12 +211,14 @@ colorFilterSelect.addEventListener("change", function () {
         .pop()
         .split("-")[0];
       if (pinColor === selectedColor) {
-        item.style.visibility = "visible";
+        item.style.display = "block";
+        const markerIndex = item.dataset.index;
+        markers[markerIndex].setVisible(true);
       } else {
-        item.style.visibility = "hidden";
+        item.style.display = "none";
+        const markerIndex = item.dataset.index;
+        markers[markerIndex].setVisible(false);
       }
     });
-    listElement.style.display = "block"; // Mantém o list visível
-    filteredListElement.style.display = "none"; // Esconde o filtered-list
   }
 });
