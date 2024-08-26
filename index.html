@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapa - Roteiro OOH</title>
+    <title>Vivo - Avaliação de Roteiros</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="vivo-logo.png" />
   </head>
@@ -27,6 +27,16 @@
         </div>
       </div>
       <div id="map"></div>
+      <div id="pins-list">
+        <select id="color-filter">
+          <option value="all">Todos</option>
+          <option value="red">Vermelho</option>
+          <option value="blue">Azul</option>
+          <option value="green">Verde</option>
+          <option value="yellow">Amarelo</option>
+          <option value="purple">Roxo</option>
+        </select>
+        <ul id="filtered-list"></ul>
       <div id="pins-list">
         <h3 id="pins-title">Pontos selecionados</h3>
         <ul id="list"></ul>

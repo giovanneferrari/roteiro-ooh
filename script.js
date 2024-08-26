@@ -21,11 +21,12 @@ colorSelect.addEventListener("change", function () {
   console.log("Selected color:", selectedColor);
 });
 
-document.getElementById("clear-button").addEventListener("click", clearInput);
-
 function addPins() {
   console.log("addPins function called");
   const addresses = document.getElementById("address").value.trim().split("\n");
+
+  console.log("Endereços:", addresses); // Verifica a lista de endereços
+
   let count = 0;
   addresses.forEach((address) => {
     if (address) {
@@ -48,14 +49,18 @@ function addPins() {
       cepsNaoEncontrados = 0;
     }
   }, 1000); // aguarda 1 segundo para mostrar a mensagem
+  document.getElementById("address").value = ""; // Limpa o campo de endereço
+  clearInputField(); // Chama a função clearInputField() para limpar o campo de endereço
 }
 
 function geocodeAddress(address, selectedColor, callback) {
   const geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, function (results, status) {
+    console.log("Status da geocodificação:", status); // Verifica o status da geocodificação
     if (status === "OK") {
       const location = results[0].geometry.location;
       bounds.extend(results[0].geometry.location);
+      console.log("Localização encontrada:", location); // Verifica a localização encontrada
 
       const marker = new google.maps.Marker({
         map: map,
@@ -111,6 +116,7 @@ function geocodeAddress(address, selectedColor, callback) {
       pinCounter++;
       callback(); // Chama o callback após o processamento do endereço
     } else {
+      console.log("Erro ao geocodificar endereço:", address); // Verifica erros de geocodificação
       cepsNaoEncontrados++;
     }
   });
@@ -173,6 +179,47 @@ function removePin(index) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  selectedColor = "red";
+const textarea = document.getElementById("address");
+
+textarea.addEventListener("keydown", function (event) {
+  console.log("Tecla pressionada:", event.key);
+
+  if (event.key === "Enter" && document.activeElement === textarea) {
+    if (!event.shiftKey) {
+      // Verifica se a tecla Shift está sendo pressionada
+      console.log("Enter pressionado!");
+      event.preventDefault(); // Cancela o evento para evitar que o cursor pule para a próxima linha
+      addPins();
+    }
+  }
+});
+
+const colorFilterSelect = document.getElementById("color-filter");
+
+colorFilterSelect.addEventListener("change", function () {
+  const selectedColor = this.value;
+  const listItems = document.querySelectorAll("#list li");
+  const listElement = document.getElementById("list");
+  const filteredListElement = document.getElementById("filtered-list");
+
+  if (selectedColor === "all") {
+    listItems.forEach((item) => (item.style.visibility = "visible"));
+    listElement.style.display = "block";
+    filteredListElement.style.display = "none";
+  } else {
+    listItems.forEach((item) => {
+      const pinColor = item
+        .querySelector("img")
+        .src.split("/")
+        .pop()
+        .split("-")[0];
+      if (pinColor === selectedColor) {
+        item.style.visibility = "visible";
+      } else {
+        item.style.visibility = "hidden";
+      }
+    });
+    listElement.style.display = "block"; // Mantém o list visível
+    filteredListElement.style.display = "none"; // Esconde o filtered-list
+  }
 });

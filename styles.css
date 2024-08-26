@@ -88,8 +88,10 @@ h3 {
   font-size: 14px;
 }
 
+/* Estilo para o campo #address */
 #form-container #address {
   margin-bottom: 5px; /* Ajuste o valor conforme necessário */
+  font-family: "arial", sans-serif;
 }
 
 /* Estilo para o container de botões dentro do formulário */
