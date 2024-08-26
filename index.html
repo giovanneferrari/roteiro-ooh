@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapa - Roteiro OOH</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="vivo-logo.png" />
+  </head>
+  <body>
     <div id="map-container">
-        <div id="form-container">
-            <h3>Insira os CEPs abaixo:</h3>
-            <textarea id="address" placeholder="Digite CEPs, cidade ou endereço (um por linha)"></textarea>
-            <select id="pin-color">
-                <option value="red" selected>Vermelho</option>
-                <option value="blue">Azul</option>
-                <option value="green">Verde</option>
-                <option value="yellow">Amarelo</option>
-                <option value="purple">Roxo</option>
-            </select>
-            <div>
-                <button id="add-cep" onclick="addPins()">Adicionar</button>
-            </div>
+      <div id="form-container">
+        <h3>Insira os CEPs abaixo:</h3>
+        <textarea
+          id="address"
+          placeholder="Digite CEPs, cidade ou endereço (um por linha)"
+        ></textarea>
+        <select id="pin-color">
+          <option value="red" selected>Vermelho</option>
+          <option value="blue">Azul</option>
+          <option value="green">Verde</option>
+          <option value="yellow">Amarelo</option>
+          <option value="purple">Roxo</option>
+        </select>
+        <div>
+          <button id="add-cep" onclick="addPins()">Adicionar</button>
         </div>
-        <div id="map"></div>
-        <div id="pins-list">
-            <h3 id="pins-title">Pontos selecionados</h3>
-            <ul id="list"></ul>
-            <button id="delete-all" onclick="clearInput()">Excluir todos</button>
-        </div>
+      </div>
+      <div id="map"></div>
+      <div id="pins-list">
+        <h3 id="pins-title">Pontos selecionados</h3>
+        <ul id="list"></ul>
+        <button id="delete-all" onclick="clearInput()">Excluir todos</button>
+      </div>
     </div>
     <!-- Rótulo do Criador -->
     <div id="creator-box">
-        <p>Desenvolvido por @GiovanneFerrari</p>
+      <p>Desenvolvido por @GiovanneFerrari</p>
     </div>
 
     <script src="script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAX1t7qNlEl1t8HlBEmKMSXhM5j6cnzKr8&callback=initMap" async defer></script>
-</body>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAX1t7qNlEl1t8HlBEmKMSXhM5j6cnzKr8&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
 </html>

@@ -1,282 +1,286 @@
 /* Estilo geral para garantir que o body e html ocupem 100% da altura */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif; /* Define uma fonte padrão */
-    box-sizing: border-box; /* Aplica box-sizing globalmente */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif; /* Define uma fonte padrão */
+  box-sizing: border-box; /* Aplica box-sizing globalmente */
 }
 
-*, *::before, *::after {
-    box-sizing: inherit; /* Garante que todos os elementos herdem o box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* Garante que todos os elementos herdem o box-sizing */
 }
 
 h3 {
-font-family: 'arial', sans-serif; /* Define a fonte */
-font-size: 18px; /* Define o tamanho da fonte */
-font-weight: bold; /* Define o peso da fonte (negrito) */
-color: #cd8fff; /* Define a cor do texto */
-text-align: center; /* Alinha o texto ao centro */
+  font-family: "arial", sans-serif; /* Define a fonte */
+  font-size: 18px; /* Define o tamanho da fonte */
+  font-weight: bold; /* Define o peso da fonte (negrito) */
+  color: #cd8fff; /* Define a cor do texto */
+  text-align: center; /* Alinha o texto ao centro */
 }
 
 /* Estilo para o container do mapa e a área ao redor do mapa */
 #map-container {
-    position: relative;
-    height: 100vh; /* 100% da altura da viewport */
-    width: 100vw; /* 100% da largura da viewport */
-    display: flex;
-    flex-direction: row;
+  position: relative;
+  height: 100vh; /* 100% da altura da viewport */
+  width: 100vw; /* 100% da largura da viewport */
+  display: flex;
+  flex-direction: row;
 }
 
 /* Estilo para o elemento do mapa */
 #map {
-    flex: 1; /* O mapa ocupa todo o espaço disponível */
-    position: relative; /* Ajuste para que o mapa ocupe o espaço certo */
+  flex: 1; /* O mapa ocupa todo o espaço disponível */
+  position: relative; /* Ajuste para que o mapa ocupe o espaço certo */
 }
 
 /* Estilo para o formulário e a lista de pins */
 #form-container {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-    background-color: #4a1e6d;
-    padding: 15px; /* Adiciona mais espaçamento interno */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    width: 300px; /* Define uma largura fixa */
-    max-width: 90%; /* Garante que não ultrapasse o tamanho da tela - principalmente em telas menores */
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background-color: #4a1e6d;
+  padding: 15px; /* Adiciona mais espaçamento interno */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 300px; /* Define uma largura fixa */
+  max-width: 90%; /* Garante que não ultrapasse o tamanho da tela - principalmente em telas menores */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Estilo para o botão de adicionar CEPs */
 #add-cep {
-    background-color: #7030A0; /* Cor de fundo roxa */
-    border: none;
-    color: white;
-    border-radius: 4px;
-    padding: 12px 20px; /* Padding consistente */
-    cursor: pointer;
-    font-size: 16px; /* Tamanho de fonte consistente */
-    width: 100%; /* Largura completa */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+  background-color: #7030a0; /* Cor de fundo roxa */
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 12px 20px; /* Padding consistente */
+  cursor: pointer;
+  font-size: 16px; /* Tamanho de fonte consistente */
+  width: 100%; /* Largura completa */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
 }
 
 /* Estilo para o botão ao passar o mouse */
 #add-cep-button:hover {
-    background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
+  background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
 }
 
 /* Estilo para o botão ao ser clicado */
 #add-cep-button:active {
-    background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
-    transform: scale(0.98); /* Leve redução de tamanho ao clicar */
+  background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
+  transform: scale(0.98); /* Leve redução de tamanho ao clicar */
 }
 
 /* Estilo para o input de texto - Espaço onde incluo os CEPs */
-    #form-container input[type="text"],
-    #form-container select {
+#form-container input[type="text"],
+#form-container select {
+  width: 100%; /* Ocupa toda a largura disponível */
+  padding: 1px;
+  border: 1px solid #7030a0;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
 
-        width: 100%; /* Ocupa toda a largura disponível */
-        padding: 1px;
-        border: 1px solid #7030A0;
-        border-radius: 4px;
-        margin-bottom: 5px;
-        font-size: 14px;
-    }
-
-    #form-container #address {
-        margin-bottom: 5px; /* Ajuste o valor conforme necessário */
-    }
+#form-container #address {
+  margin-bottom: 5px; /* Ajuste o valor conforme necessário */
+}
 
 /* Estilo para o container de botões dentro do formulário */
 #buttons-container {
-    display: flex;
-    justify-content: space-between; /* Distribui os botões com espaço entre eles */
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between; /* Distribui os botões com espaço entre eles */
+  margin-top: 10px;
 }
 
 /* Estilo para o botão de adicionar dentro do formulário */
-    #buttons-container button {
-        background-color: #7030A0;
-        border: none;
-        color: white;
-        border-radius: 4px;
-        padding: 12px 20px; /* Padding consistente */
-        cursor: pointer;
-        font-size: 16px; /* Tamanho de fonte consistente */
-        width: calc(100% - 50px); /* Largura para alinhar dois botões lado a lado com espaçamento */
-        transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para efeitos */
-    }
+#buttons-container button {
+  background-color: #7030a0;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 12px 20px; /* Padding consistente */
+  cursor: pointer;
+  font-size: 16px; /* Tamanho de fonte consistente */
+  width: calc(
+    100% - 50px
+  ); /* Largura para alinhar dois botões lado a lado com espaçamento */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para efeitos */
+}
 
 /* Adiciona estilo específico ao botão "Excluir Todos" */
 #delete-all {
-    background-color: #7030A0; /* Cor roxa para o botão */
-    border: none;
-    color: white;
-    border-radius: 4px;
-    padding: 6px 20px; /* Padding consistente */
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%; /* Largura completa */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para efeitos */
+  background-color: #7030a0; /* Cor roxa para o botão */
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 6px 20px; /* Padding consistente */
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%; /* Largura completa */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave para efeitos */
 }
 
 /* Estilo para os botões ao passar o mouse */
 #buttons-container button:hover,
 #delete-all:hover {
-    background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
+  background-color: #5e2a80; /* Cor roxa mais escura ao passar o mouse */
 }
 
 /* Estilo para o botão ao ser clicado */
 #buttons-container button:active,
 #delete-all:active {
-    background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
-    transform: scale(0.98); /* Leve redução de tamanho ao clicar */
+  background-color: #4a1e6d; /* Cor roxa ainda mais escura ao clicar */
+  transform: scale(0.98); /* Leve redução de tamanho ao clicar */
 }
 
 #pins-title {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #7030A0;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #7030a0;
 }
 /* Estilo para a lista de pins */
 #pins-list {
-    position: relative;
-    margin-top: 5px;
-    width: 300px;
-    max-height: calc(100% - 0px); /* Ajustado para não cobrir o mapa */
-    overflow-y: auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: 5;
-    padding: 10px;
-    right: 0;
+  position: relative;
+  margin-top: 5px;
+  width: 300px;
+  max-height: calc(100% - 0px); /* Ajustado para não cobrir o mapa */
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 5;
+  padding: 10px;
+  right: 0;
 }
 
-    /* Estilo para o item destacado da lista de pins */
+/* Estilo para o item destacado da lista de pins */
 #pins-list li.highlight {
-    background-color: #f5f5f5; /* Cor de fundo suave para destaque */
-    border: 2px solid #7030A0; /* Borda roxa para destacar o item */
-    border-radius: 4px; /* Arredondar bordas */
+  background-color: #f5f5f5; /* Cor de fundo suave para destaque */
+  border: 2px solid #7030a0; /* Borda roxa para destacar o item */
+  border-radius: 4px; /* Arredondar bordas */
 }
 
-    /* Estilo para o item da lista de pins ao passar o mouse */
-    #pins-list li:hover {
-        background-color: #a978ce; /* Cor de fundo ao passar o mouse */
-        border-radius: 5px;
-    }
+/* Estilo para o item da lista de pins ao passar o mouse */
+#pins-list li:hover {
+  background-color: #a978ce; /* Cor de fundo ao passar o mouse */
+  border-radius: 5px;
+}
 
-    /* Estilo para o espaço da lista de pins */
-    #pins-list ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    /*Estilo para a própria lista de pins */
-    #pins-list li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 5px;
-        font-size: 12px;
-        cursor: pointer;
-    }
+/* Estilo para o espaço da lista de pins */
+#pins-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    #pins-list li button {
-        background: none;
-        border: none;
-        color: #490f75;
-        font-size: 16px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
+/*Estilo para a própria lista de pins */
+#pins-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
 
-    /* Espaço da imagem de pin */
-    #pins-list img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-    }
+#pins-list li button {
+  background: none;
+  border: none;
+  color: #490f75;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
-    #pins-list button:hover {
-        background-color: none; /* Cor mais escura ao passar o mouse */
-        color: white;
-    }
+/* Espaço da imagem de pin */
+#pins-list img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
 
-    /* Estilo para o box sobreposto com o rótulo do criador */
+#pins-list button:hover {
+  background-color: none; /* Cor mais escura ao passar o mouse */
+  color: white;
+}
+
+/* Estilo para o box sobreposto com o rótulo do criador */
 #creator-box {
-    position: fixed; /* Fixa o box na tela */
-    bottom: 10px; /* Distância do topo */
-    left: 10px; /* Distância da borda direita */
-    background-color: rgb(39, 39, 39); /* Cor de fundo branca */
-    padding: 1px 10px; /* Espaçamento interno */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para efeito de sobreposição */
-    font-size: 8px; /* Tamanho da fonte */
-    color: #c0c0c0; /* Cor do texto (ajustar conforme desejado) */
-    z-index: 1000; /* Garante que o box fique acima de outros elementos */
+  position: fixed; /* Fixa o box na tela */
+  bottom: 10px; /* Distância do topo */
+  left: 10px; /* Distância da borda direita */
+  background-color: rgb(39, 39, 39); /* Cor de fundo branca */
+  padding: 1px 10px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para efeito de sobreposição */
+  font-size: 8px; /* Tamanho da fonte */
+  color: #c0c0c0; /* Cor do texto (ajustar conforme desejado) */
+  z-index: 1000; /* Garante que o box fique acima de outros elementos */
 }
 
 /* Media Queries para responsividade */
 
 /* Tablets */
 @media (max-width: 768px) {
-    /* Ajusta o formulário e a lista de pins para telas de tablet */
-    #form-container,
-    #pins-list {
-        width: 80%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+  /* Ajusta o formulário e a lista de pins para telas de tablet */
+  #form-container,
+  #pins-list {
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    #form-container {
-        top: 10px;
-    }
+  #form-container {
+    top: 10px;
+  }
 
-    #pins-list {
-        top: 220px; /* Ajuste o valor conforme a necessidade */
-        max-height: 300px; /* Define uma altura máxima para a lista de pins */
-        overflow-y: auto; /* Adiciona rolagem se a lista for muito longa */
-    }
+  #pins-list {
+    top: 220px; /* Ajuste o valor conforme a necessidade */
+    max-height: 300px; /* Define uma altura máxima para a lista de pins */
+    overflow-y: auto; /* Adiciona rolagem se a lista for muito longa */
+  }
 
-    /* Ajusta o container de botões para telas de tablet */
-    #buttons-container {
-        flex-direction: row;
-    }
+  /* Ajusta o container de botões para telas de tablet */
+  #buttons-container {
+    flex-direction: row;
+  }
 
-    /* Garante que os botões dentro do container tenham espaçamento adequado */
-    #buttons-container button {
-        width: 48%; /* Quase metade para dois botões lado a lado */
-    }
+  /* Garante que os botões dentro do container tenham espaçamento adequado */
+  #buttons-container button {
+    width: 48%; /* Quase metade para dois botões lado a lado */
+  }
 }
 
 /* Dispositivos Móveis */
 @media (max-width: 480px) {
-    /* Ajusta o formulário e a lista de pins para telas de dispositivos móveis */
-    #form-container,
-    #pins-list {
-        width: 95%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+  /* Ajusta o formulário e a lista de pins para telas de dispositivos móveis */
+  #form-container,
+  #pins-list {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    #pins-list {
-        top: 240px; /* Ajuste o valor conforme a necessidade */
-        max-height: 200px; /* Define uma altura máxima para a lista de pins */
-        overflow-y: auto; /* Adiciona rolagem se a lista for muito longa */
-    }
+  #pins-list {
+    top: 240px; /* Ajuste o valor conforme a necessidade */
+    max-height: 200px; /* Define uma altura máxima para a lista de pins */
+    overflow-y: auto; /* Adiciona rolagem se a lista for muito longa */
+  }
 
-    /* Ajusta o container de botões para telas móveis */
-    #buttons-container {
-        flex-direction: column;
-        gap: 10px; /* Espaçamento vertical entre os botões */
-    }
+  /* Ajusta o container de botões para telas móveis */
+  #buttons-container {
+    flex-direction: column;
+    gap: 10px; /* Espaçamento vertical entre os botões */
+  }
 
-    /* Faz com que os botões ocupem toda a largura disponível em telas móveis */
-    #buttons-container button {
-        width: 100%;
-    }
+  /* Faz com que os botões ocupem toda a largura disponível em telas móveis */
+  #buttons-container button {
+    width: 100%;
+  }
 }
