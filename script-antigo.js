@@ -55,131 +55,71 @@ function addPins() {
 
 function geocodeAddress(address, selectedColor, callback) {
   const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: address }, function (results, status) {
+    console.log("Status da geocodificação:", status); // Verifica o status da geocodificação
+    if (status === "OK") {
+      const location = results[0].geometry.location;
+      bounds.extend(results[0].geometry.location);
+      console.log("Localização encontrada:", location); // Verifica a localização encontrada
 
-  // Verifica se o endereço é uma coordenada (formato "lat,lng")
-  const coordRegex = /^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/;
-  if (coordRegex.test(address)) {
-    const [lat, lng] = address.split(",").map(Number);
-    const location = new google.maps.LatLng(lat, lng);
-    bounds.extend(location);
+      const marker = new google.maps.Marker({
+        map: map,
+        position: location,
+        icon: `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`, // Use selectedColor aqui
+      });
 
-    const marker = new google.maps.Marker({
-      map: map,
-      position: location,
-      icon: `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`, // Use selectedColor aqui
-    });
+      markers.push(marker);
 
-    markers.push(marker);
+      const listItem = document.createElement("li");
+      const pinIcon = document.createElement("img");
+      pinIcon.src = `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`;
+      listItem.appendChild(pinIcon);
+      listItem.appendChild(
+        document.createTextNode(
+          `Pin ${pinCounter}: ${results[0].formatted_address}`
+        )
+      );
+      listItem.dataset.index = pinCounter - 1;
 
-    const listItem = document.createElement("li");
-    const pinIcon = document.createElement("img");
-    pinIcon.src = `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`;
-    listItem.appendChild(pinIcon);
-    listItem.appendChild(
-      document.createTextNode(`Pin ${pinCounter}: (${lat}, ${lng})`)
-    );
-    listItem.dataset.index = pinCounter - 1;
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "X";
+      deleteButton.onclick = (event) => {
+        const index = event.target.parentElement.getAttribute("data-index");
+        removePin(index);
+      };
+      listItem.appendChild(deleteButton);
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "X";
-    deleteButton.onclick = (event) => {
-      const index = event.target.parentElement.getAttribute("data-index");
-      removePin(index);
-    };
-    listItem.appendChild(deleteButton);
+      listItem.onclick = function () {
+        const index = parseInt(this.dataset.index);
+        highlightPin(index);
+      };
 
-    listItem.onclick = function () {
-      const index = parseInt(this.dataset.index);
-      highlightPin(index);
-    };
+      document.getElementById("list").appendChild(listItem);
 
-    document.getElementById("list").appendChild(listItem);
+      // Abre janela de informações
+      const infowindow = new google.maps.InfoWindow({
+        content: `<strong>${results[0].formatted_address}</strong>`,
+        maxWidth: 200,
+        maxHeight: 100, // Adicione essa linha
+      });
+      marker.infowindow = infowindow;
 
-    // Abre janela de informações
-    const infowindow = new google.maps.InfoWindow({
-      content: `<strong>Coordenadas: (${lat}, ${lng})</strong>`,
-      maxWidth: 200,
-      maxHeight: 100,
-    });
-    marker.infowindow = infowindow;
+      // Add a click event listener to the marker
+      marker.addListener("click", function () {
+        if (currentInfoWindow) {
+          currentInfoWindow.close();
+        }
+        currentInfoWindow = infowindow;
+        infowindow.open(map, marker);
+      });
 
-    marker.addListener("click", function () {
-      if (currentInfoWindow) {
-        currentInfoWindow.close();
-      }
-      currentInfoWindow = infowindow;
-      infowindow.open(map, marker);
-    });
-
-    pinCounter++;
-    callback(); // Chama o callback após o processamento das coordenadas
-  } else {
-    // Caso não seja coordenada, faz a geocodificação normal
-    geocoder.geocode({ address: address }, function (results, status) {
-      console.log("Status da geocodificação:", status); // Verifica o status da geocodificação
-      if (status === "OK") {
-        const location = results[0].geometry.location;
-        bounds.extend(results[0].geometry.location);
-        console.log("Localização encontrada:", location); // Verifica a localização encontrada
-
-        const marker = new google.maps.Marker({
-          map: map,
-          position: location,
-          icon: `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`, // Use selectedColor aqui
-        });
-
-        markers.push(marker);
-
-        const listItem = document.createElement("li");
-        const pinIcon = document.createElement("img");
-        pinIcon.src = `http://maps.google.com/mapfiles/ms/icons/${selectedColor}-dot.png`;
-        listItem.appendChild(pinIcon);
-        listItem.appendChild(
-          document.createTextNode(
-            `Pin ${pinCounter}: ${results[0].formatted_address}`
-          )
-        );
-        listItem.dataset.index = pinCounter - 1;
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
-        deleteButton.onclick = (event) => {
-          const index = event.target.parentElement.getAttribute("data-index");
-          removePin(index);
-        };
-        listItem.appendChild(deleteButton);
-
-        listItem.onclick = function () {
-          const index = parseInt(this.dataset.index);
-          highlightPin(index);
-        };
-
-        document.getElementById("list").appendChild(listItem);
-
-        // Abre janela de informações
-        const infowindow = new google.maps.InfoWindow({
-          content: `<strong>${results[0].formatted_address}</strong>`,
-          maxWidth: 200,
-          maxHeight: 100, // Adicione essa linha
-        });
-        marker.infowindow = infowindow;
-
-        marker.addListener("click", function () {
-          if (currentInfoWindow) {
-            currentInfoWindow.close();
-          }
-          currentInfoWindow = infowindow;
-          infowindow.open(map, marker);
-        });
-
-        pinCounter++;
-        callback(); // Chama o callback após o processamento do endereço
-      } else {
-        console.log("Erro ao geocodificar endereço:", address); // Verifica erros de geocodificação
-        cepsNaoEncontrados++;
-      }
-    });
-  }
+      pinCounter++;
+      callback(); // Chama o callback após o processamento do endereço
+    } else {
+      console.log("Erro ao geocodificar endereço:", address); // Verifica erros de geocodificação
+      cepsNaoEncontrados++;
+    }
+  });
 }
 
 function highlightPin(index) {
